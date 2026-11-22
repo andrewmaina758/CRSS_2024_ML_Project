@@ -1,0 +1,79 @@
+{
+  "information_comparison": [
+    {
+      "combined": 0.17054273982919882,
+      "context": 0.18600883271592783,
+      "context_minus_combined": 0.01546609288672901,
+      "method": "CART"
+    },
+    {
+      "combined": 0.17200601238085275,
+      "context": 0.1932697972091513,
+      "context_minus_combined": 0.02126378482829855,
+      "method": "Logistic regression"
+    },
+    {
+      "combined": 0.17020761961242636,
+      "context": 0.18728012760744056,
+      "context_minus_combined": 0.017072507995014197,
+      "method": "Random forest"
+    }
+  ],
+  "overall_development_winner": {
+    "features": "combined",
+    "method": "Random forest",
+    "pooled_weighted_brier": 0.17020761961242636,
+    "settings": "{'n_estimators': 120, 'max_depth': 18, 'min_samples_leaf': 20}"
+  },
+  "primary_metric": "pooled_survey_weighted_brier",
+  "required_before_test": [
+    "Freeze method",
+    "Freeze feature set",
+    "Freeze hyperparameters",
+    "Freeze preprocessing",
+    "Freeze primary and secondary metrics",
+    "Approve final-test evaluation code"
+  ],
+  "reserved_test_rows": 10157,
+  "seed": 678,
+  "selected_by_method_feature_set": [
+    {
+      "features": "combined",
+      "method": "CART",
+      "pooled_weighted_brier": 0.17054273982919882,
+      "settings": "{'max_depth': 10, 'min_samples_leaf': 120, 'ccp_alpha': 0.0002}"
+    },
+    {
+      "features": "context",
+      "method": "CART",
+      "pooled_weighted_brier": 0.18600883271592783,
+      "settings": "{'max_depth': 10, 'min_samples_leaf': 40, 'ccp_alpha': 0.0002}"
+    },
+    {
+      "features": "combined",
+      "method": "Logistic regression",
+      "pooled_weighted_brier": 0.17200601238085275,
+      "settings": "{'C': 1.0}"
+    },
+    {
+      "features": "context",
+      "method": "Logistic regression",
+      "pooled_weighted_brier": 0.1932697972091513,
+      "settings": "{'C': 0.1}"
+    },
+    {
+      "features": "combined",
+      "method": "Random forest",
+      "pooled_weighted_brier": 0.17020761961242636,
+      "settings": "{'n_estimators': 120, 'max_depth': 18, 'min_samples_leaf': 20}"
+    },
+    {
+      "features": "context",
+      "method": "Random forest",
+      "pooled_weighted_brier": 0.18728012760744056,
+      "settings": "{'n_estimators': 120, 'max_depth': 18, 'min_samples_leaf': 20}"
+    }
+  ],
+  "test_access_during_search": false,
+  "threshold": 0.5
+}

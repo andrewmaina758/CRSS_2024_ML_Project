@@ -1,0 +1,31 @@
+method,features,settings,fold,n,weighted_brier
+CART,combined,"{'max_depth': 10, 'min_samples_leaf': 120, 'ccp_alpha': 0.0002}",1,8125,0.17340071422166864
+CART,combined,"{'max_depth': 10, 'min_samples_leaf': 120, 'ccp_alpha': 0.0002}",2,8125,0.16851479036123604
+CART,combined,"{'max_depth': 10, 'min_samples_leaf': 120, 'ccp_alpha': 0.0002}",3,8125,0.16963718461194555
+CART,combined,"{'max_depth': 10, 'min_samples_leaf': 120, 'ccp_alpha': 0.0002}",4,8125,0.17059078315703535
+CART,combined,"{'max_depth': 10, 'min_samples_leaf': 120, 'ccp_alpha': 0.0002}",5,8124,0.17055236497356083
+CART,context,"{'max_depth': 10, 'min_samples_leaf': 40, 'ccp_alpha': 0.0002}",1,8125,0.18874439730643286
+CART,context,"{'max_depth': 10, 'min_samples_leaf': 40, 'ccp_alpha': 0.0002}",2,8125,0.18523536709649693
+CART,context,"{'max_depth': 10, 'min_samples_leaf': 40, 'ccp_alpha': 0.0002}",3,8125,0.18582200326137535
+CART,context,"{'max_depth': 10, 'min_samples_leaf': 40, 'ccp_alpha': 0.0002}",4,8125,0.18466369775020822
+CART,context,"{'max_depth': 10, 'min_samples_leaf': 40, 'ccp_alpha': 0.0002}",5,8124,0.185562690629793
+Logistic regression,combined,{'C': 1.0},1,8125,0.17490107423915296
+Logistic regression,combined,{'C': 1.0},2,8125,0.1693172443651021
+Logistic regression,combined,{'C': 1.0},3,8125,0.1707788358225653
+Logistic regression,combined,{'C': 1.0},4,8125,0.17197504948941805
+Logistic regression,combined,{'C': 1.0},5,8124,0.17302903479156032
+Logistic regression,context,{'C': 0.1},1,8125,0.19479138336648608
+Logistic regression,context,{'C': 0.1},2,8125,0.19190565967202822
+Logistic regression,context,{'C': 0.1},3,8125,0.19309856730934302
+Logistic regression,context,{'C': 0.1},4,8125,0.19267137561702635
+Logistic regression,context,{'C': 0.1},5,8124,0.19386209220560338
+Random forest,combined,"{'n_estimators': 120, 'max_depth': 18, 'min_samples_leaf': 20}",1,8125,0.1730469208474751
+Random forest,combined,"{'n_estimators': 120, 'max_depth': 18, 'min_samples_leaf': 20}",2,8125,0.1687009947197273
+Random forest,combined,"{'n_estimators': 120, 'max_depth': 18, 'min_samples_leaf': 20}",3,8125,0.16929228897210133
+Random forest,combined,"{'n_estimators': 120, 'max_depth': 18, 'min_samples_leaf': 20}",4,8125,0.16992400864335613
+Random forest,combined,"{'n_estimators': 120, 'max_depth': 18, 'min_samples_leaf': 20}",5,8124,0.17005882837500064
+Random forest,context,"{'n_estimators': 120, 'max_depth': 18, 'min_samples_leaf': 20}",1,8125,0.18949729629744583
+Random forest,context,"{'n_estimators': 120, 'max_depth': 18, 'min_samples_leaf': 20}",2,8125,0.18578508890964493
+Random forest,context,"{'n_estimators': 120, 'max_depth': 18, 'min_samples_leaf': 20}",3,8125,0.18742366535054208
+Random forest,context,"{'n_estimators': 120, 'max_depth': 18, 'min_samples_leaf': 20}",4,8125,0.18639876845020276
+Random forest,context,"{'n_estimators': 120, 'max_depth': 18, 'min_samples_leaf': 20}",5,8124,0.1872748380629053

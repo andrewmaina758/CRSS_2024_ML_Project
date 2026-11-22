@@ -1,0 +1,27 @@
+method,features,settings,pooled_weighted_brier
+Random forest,combined,"{'n_estimators': 120, 'max_depth': 18, 'min_samples_leaf': 20}",0.17020761961242636
+CART,combined,"{'max_depth': 10, 'min_samples_leaf': 120, 'ccp_alpha': 0.0002}",0.17054273982919882
+CART,combined,"{'max_depth': 10, 'min_samples_leaf': 40, 'ccp_alpha': 0.0002}",0.17064777165793896
+CART,combined,"{'max_depth': 10, 'min_samples_leaf': 120, 'ccp_alpha': 0.0}",0.17115391838278896
+CART,combined,"{'max_depth': 10, 'min_samples_leaf': 40, 'ccp_alpha': 0.0}",0.17189261147111273
+Logistic regression,combined,{'C': 1.0},0.17200601238085275
+Logistic regression,combined,{'C': 0.1},0.17206831252584462
+Logistic regression,combined,{'C': 10.0},0.17209598548738256
+Random forest,combined,"{'n_estimators': 80, 'max_depth': 10, 'min_samples_leaf': 40}",0.1731826188772549
+CART,combined,"{'max_depth': 5, 'min_samples_leaf': 120, 'ccp_alpha': 0.0002}",0.1736621196491736
+CART,combined,"{'max_depth': 5, 'min_samples_leaf': 40, 'ccp_alpha': 0.0002}",0.1737001865081812
+CART,combined,"{'max_depth': 5, 'min_samples_leaf': 120, 'ccp_alpha': 0.0}",0.17373081506596444
+CART,combined,"{'max_depth': 5, 'min_samples_leaf': 40, 'ccp_alpha': 0.0}",0.17374494010819552
+CART,context,"{'max_depth': 10, 'min_samples_leaf': 40, 'ccp_alpha': 0.0002}",0.18600883271592783
+CART,context,"{'max_depth': 10, 'min_samples_leaf': 120, 'ccp_alpha': 0.0002}",0.18623063437268908
+CART,context,"{'max_depth': 10, 'min_samples_leaf': 120, 'ccp_alpha': 0.0}",0.18638803898871023
+CART,context,"{'max_depth': 5, 'min_samples_leaf': 40, 'ccp_alpha': 0.0002}",0.18714899688229705
+CART,context,"{'max_depth': 5, 'min_samples_leaf': 120, 'ccp_alpha': 0.0}",0.18723907950107319
+CART,context,"{'max_depth': 10, 'min_samples_leaf': 40, 'ccp_alpha': 0.0}",0.18723997093398664
+CART,context,"{'max_depth': 5, 'min_samples_leaf': 40, 'ccp_alpha': 0.0}",0.1872427384135138
+CART,context,"{'max_depth': 5, 'min_samples_leaf': 120, 'ccp_alpha': 0.0002}",0.18724538520394915
+Random forest,context,"{'n_estimators': 120, 'max_depth': 18, 'min_samples_leaf': 20}",0.18728012760744056
+Random forest,context,"{'n_estimators': 80, 'max_depth': 10, 'min_samples_leaf': 40}",0.18950206372990008
+Logistic regression,context,{'C': 0.1},0.1932697972091513
+Logistic regression,context,{'C': 1.0},0.19335029103566947
+Logistic regression,context,{'C': 10.0},0.1934178524092022

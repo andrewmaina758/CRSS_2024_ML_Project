@@ -1,0 +1,25 @@
+# Python environment and bytecode
+.venv/
+__pycache__/
+*.py[cod]
+*.md
+append_validation_cells.py
+
+# Notebook working files (not notebooks themselves)
+.ipynb_checkpoints/
+
+# Local test, coverage, and tool artifacts
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Generated local outputs; data/ and notebooks remain tracked
+artifacts/
+outputs/
+*.log
+
+# OS metadata
+.DS_Store
+Thumbs.db
