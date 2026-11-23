@@ -6,3 +6,236 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
+
+FOREST_SETTINGS = [
+    {
+        "n_estimators": 80,
+        "max_depth": 10,
+        "min_samples_leaf": 40
+    },
+    {
+        "n_estimators": 120,
+        "max_depth": 18,
+        "min_samples_leaf": 20
+    },
+]
+
+def make_random_forest(features, numeric_features, settings):
+
+    numeric = [
+        column for column in features
+        if column in numeric_features
+    ]
+
+    categorical = [
+        column for column in features
+        if column not in numeric
+    ]
+
+    prepare = ColumnTransformer([
+        (
+            "numeric",
+            SimpleImputer(
+                strategy="median",
+                keep_empty_features=True
+            ),
+            numeric,
+        ),
+        (
+            "categorical",
+            OneHotEncoder(
+                handle_unknown="ignore",
+                sparse_output=False,
+                dtype=np.float32,
+            ),
+            categorical,
+        ),
+    ])
+
+    forest = RandomForestClassifier(
+        max_features="sqrt",
+        random_state=SEED,
+        n_jobs=-1,
+        **settings,
+    )
+
+    model = Pipeline([
+        ("prepare", prepare),
+        ("classifier", forest),
+    ])
+
+    return model
+
+FEATURE_SETS = {
+    "context": CONTEXT,
+    "combined": COMBINED,
+}
+
+rf_trials = []
+rf_oof = {}
+rf_fold_scores = []
+
+for feature_name, features in FEATURE_SETS.items():
+
+    numeric_features = (
+        NUMERIC_CONTEXT
+        if feature_name == "context"
+        else NUMERIC_COMBINED
+    )
+
+    for settings in FOREST_SETTINGS:
+
+        oof = pd.Series(
+            np.nan,
+            index=development.index,
+            dtype="float64"
+        )
+
+        for fold_number in range(1, 6):
+
+            training = development.loc[
+                folds.ne(fold_number)
+            ]
+
+            validation = development.loc[
+                folds.eq(fold_number)
+            ]
+
+            normalized_weights = (
+                training["WEIGHT"] /
+                training["WEIGHT"].mean()
+            )
+
+            model = make_random_forest(
+                features,
+                numeric_features,
+                settings
+            )
+
+            model.fit(
+                training[features],
+                training["injury_involved"],
+                classifier__sample_weight=normalized_weights
+            )
+
+            probability = model.predict_proba(
+                validation[features]
+            )[:, 1]
+
+            oof.loc[validation.index] = probability
+
+            fold_score = weighted_brier(
+                validation["injury_involved"],
+                probability,
+                validation["WEIGHT"]
+            )
+
+            rf_fold_scores.append({
+                "features": feature_name,
+                "settings": repr(settings),
+                "fold": fold_number,
+                "weighted_brier": fold_score,
+            })
+
+        if not oof.notna().all():
+            raise ValueError(
+                "Random Forest produced incomplete predictions"
+            )
+
+        pooled_brier = weighted_brier(
+            development["injury_involved"],
+            oof,
+            development["WEIGHT"]
+        )
+
+        rf_trials.append({
+            "method": "Random Forest",
+            "features": feature_name,
+            "settings": repr(settings),
+            "pooled_weighted_brier": pooled_brier,
+        })
+
+        rf_oof[
+            f"{feature_name}__{repr(settings)}"
+        ] = oof
+
+
+rf_results = pd.DataFrame(rf_trials).sort_values(
+    "pooled_weighted_brier"
+).reset_index(drop=True)
+
+print(rf_results)
+
+best_rf = (
+    rf_results
+    .sort_values("pooled_weighted_brier")
+    .drop_duplicates("features")
+    .reset_index(drop=True)
+)
+
+print(best_rf)
+
+from sklearn.metrics import (
+    roc_auc_score,
+    average_precision_score,
+    precision_score,
+    recall_score,
+    f1_score,
+)
+
+secondary_results = []
+
+for row in best_rf.itertuples(index=False):
+
+    label = f"{row.features}__{row.settings}"
+
+    probability = rf_oof[label]
+
+    outcome = development["injury_involved"]
+    weights = development["WEIGHT"]
+
+    prediction = probability >= 0.50
+
+    secondary_results.append({
+        "features": row.features,
+
+        "weighted_brier": row.pooled_weighted_brier,
+
+        "weighted_roc_auc": roc_auc_score(
+            outcome,
+            probability,
+            sample_weight=weights
+        ),
+
+        "weighted_average_precision": average_precision_score(
+            outcome,
+            probability,
+            sample_weight=weights
+        ),
+
+        "weighted_precision": precision_score(
+            outcome,
+            prediction,
+            sample_weight=weights,
+            zero_division=0
+        ),
+
+        "weighted_recall": recall_score(
+            outcome,
+            prediction,
+            sample_weight=weights,
+            zero_division=0
+        ),
+
+        "weighted_f1": f1_score(
+            outcome,
+            prediction,
+            sample_weight=weights,
+            zero_division=0
+        ),
+    })
+
+rf_secondary = pd.DataFrame(secondary_results)
+
+print(rf_secondary)
+
